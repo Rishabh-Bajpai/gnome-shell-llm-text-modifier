@@ -1,0 +1,10 @@
+{
+  "name": "LLM Text Modifier",
+  "description": "Uses a local LLM to fix or improve text in your clipboard via hotkeys.",
+  "uuid": "llm-text-modifier@rishabhbajpai24.com",
+  "version": 1,
+  "shell-version": ["45", "46"],
+  "url": "https://github.com/Rishabh-Bajpai/gnome-shell-llm-text-modifier",
+  "settings-schema": "org.gnome.shell.extensions.llm-text-modifier",
+  "gettext-domain": "llm-text-modifier"
+}

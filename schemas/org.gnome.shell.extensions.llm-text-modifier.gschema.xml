@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.llm-text-modifier" path="/org/gnome/shell/extensions/llm-text-modifier/">
+
+    <key name="api-endpoint" type="s">
+      <default>'http://127.0.0.1:1234/v1/chat/completions'</default>
+      <summary>OpenAI-compatible API endpoint</summary>
+      <description>The full URL for the chat completions endpoint.</description>
+    </key>
+
+    <key name="model-name" type="s">
+      <default>'qwen/qwen3-vl-30b'</default>
+      <summary>LLM Model Name</summary>
+      <description>The model identifier to be used for the API request.</description>
+    </key>
+
+    <key name="hotkey-fix" type="as">
+      <default>['&lt;Control&gt;&lt;Super&gt;o']</default>
+      <summary>Fix Grammar Hotkey</summary>
+    </key>
+
+    <key name="hotkey-improve" type="as">
+      <default>['&lt;Control&gt;&lt;Super&gt;p']</default>
+      <summary>Improve Text Hotkey</summary>
+    </key>
+
+    <key name="prompt-fix-grammar" type="s">
+      <default>'You are a grammar correction tool. Correct the following text. Return *only* the corrected text, with no explanation, preamble, or markdown formatting.'</default>
+      <summary>System prompt for fixing grammar</summary>
+      <description>The system prompt sent to the LLM for the 'fix grammar' action.</description>
+    </key>
+
+    <key name="prompt-improve-text" type="s">
+      <default>'You are an editing assistant. Improve the following text for clarity, flow, and impact. Return *only* the improved text, with no explanation, preamble, or markdown formatting.'</default>
+      <summary>System prompt for improving text</summary>
+      <description>The system prompt sent to the LLM for the 'improve text' action.</description>
+    </key>
+
+  </schema>
+</schemalist>
