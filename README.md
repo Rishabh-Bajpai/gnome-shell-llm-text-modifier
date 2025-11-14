@@ -50,8 +50,8 @@ If you want to install the latest development version:
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/rishabhbajpai24/your-repo-name.git](https://github.com/rishabhbajpai24/your-repo-name.git)
-    cd your-repo-name
+    git clone [https://github.com/Rishabh-Bajpai/gnome-shell-llm-text-modifier.git](https://github.com/Rishabh-Bajpai/gnome-shell-llm-text-modifier.git)
+    cd gnome-shell-llm-text-modifier
     ```
 
 2.  **Run the install script:**
