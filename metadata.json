@@ -1,8 +1,8 @@
 {
   "name": "LLM Text Modifier",
-  "description": "🚀 Supercharge your clipboard with Local AI!\n\nInstantly fix grammar or improve your writing style using your own local LLM server (like LM Studio, Ollama, or LocalAI).\n\n✨ Features:\n• Fix Grammar (Ctrl+Win+O)\n• Improve Text (Ctrl+Win+P)\n• Privacy-first: No data leaves your machine.\n\nFully configurable hotkeys, API endpoints, and system prompts.",
+  "description": "🚀 Supercharge your clipboard with Local AI!\n\nInstantly fix grammar or improve your writing style using your own local LLM server (like LM Studio or Ollama) or cloud LLM servers (like Openai or Grok).\n\n✨ Features:\n• Fix Grammar (Ctrl+Win+O)\n• Improve Text (Ctrl+Win+P)\n• Privacy-first: No data leaves your machine.\n\nFully configurable hotkeys, API endpoints, and system prompts. \n\n Donate to support work work: https://github.com/sponsors/Rishabh-Bajpai",
   "uuid": "llm-text-modifier@rishabhbajpai24.com",
-  "version": 3,
+  "version": 4,
   "shell-version": [
     "45",
     "46"
