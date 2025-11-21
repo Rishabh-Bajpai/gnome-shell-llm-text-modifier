@@ -96,6 +96,7 @@ export default class LLMTextExtension extends Extension {
 
             const apiEndpoint = this._settings.get_string('api-endpoint');
             const modelName = this._settings.get_string('model-name');
+            const apiKey = this._settings.get_string('api-key');
             const messages = this._getPrompt(mode, clipboardText);
 
             const payload = JSON.stringify({
@@ -105,6 +106,10 @@ export default class LLMTextExtension extends Extension {
             });
 
             const message = Soup.Message.new('POST', apiEndpoint);
+
+            // Add Authorization header
+            message.request_headers.append('Authorization', `Bearer ${apiKey}`);
+
             message.set_request_body_from_bytes(
                 'application/json',
                 new TextEncoder().encode(payload)

@@ -36,6 +36,16 @@ export default class LLMTextPreferences extends ExtensionPreferences {
             settings.set_string('model-name', entry.get_text());
         });
 
+        // API Key
+        const apiKeyRow = new Adw.PasswordEntryRow({
+            title: 'API Key',
+            text: settings.get_string('api-key'),
+        });
+        apiGroup.add(apiKeyRow);
+        apiKeyRow.connect('notify::text', (entry) => {
+            settings.set_string('api-key', entry.get_text());
+        });
+
         // --- Hotkey Settings Group ---
         const hotkeyGroup = new Adw.PreferencesGroup({
             title: 'Hotkey Configuration',
