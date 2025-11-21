@@ -14,10 +14,11 @@ A GNOME Shell extension that uses a local, OpenAI-compatible LLM to fix grammar 
 
 * **Fix Grammar:** Select text and press a hotkey to correct grammar.
 * **Improve Text:** Select text and press a hotkey to improve clarity, flow, and impact.
-* **Local LLM Support:** Works with any OpenAI-compatible API endpoint.
+* **Local & Cloud LLM Support:** Works with any OpenAI-compatible API endpoint, including local servers (LM Studio, Ollama) and cloud providers (OpenAI, Groq, etc.).
 * **Privacy-Focused:** Ideal for use with local-first tools like **LM Studio**, **Ollama**, or **vLLM**.
 * **Highly Configurable:**
     * Set your custom API endpoint and model name.
+    * **API Key Support:** Add an API key if your endpoint requires authentication.
     * Customize the hotkeys for both actions.
     * Modify the system prompts to fine-tune the AI's behavior.
 
@@ -73,9 +74,13 @@ After installing, you **must** configure the extension to point to your local LL
 3.  Click the **gear icon** ⚙️ next to "LLM Text Modifier".
 4.  Set the **API Endpoint**.
     * For LM Studio, this is typically `http://127.0.0.1:1234/v1/chat/completions`.
+    * For OpenAI, use `https://api.openai.com/v1/chat/completions`.
 5.  Set the **Model Name**.
-    * This must *exactly* match the model identifier your server uses (e.g., `qwen/qwen3-vl-30b`). For LM Studio, this setting is often ignored or can be set to "local-model".
-6.  (Optional) Change the hotkeys or system prompts to your liking.
+    * This must *exactly* match the model identifier your server uses (e.g., `qwen/qwen3-vl-30b` or `gpt-4o`). For LM Studio, this setting is often ignored or can be set to "local-model".
+6.  **Set the API Key (Optional)**
+    * If your endpoint requires an API key (e.g. OpenAI, Groq), enter it here.
+    * For local servers like LM Studio, you can leave the default "random" value.
+7.  (Optional) Change the hotkeys or system prompts to your liking.
 
 ## ⌨️ Usage
 

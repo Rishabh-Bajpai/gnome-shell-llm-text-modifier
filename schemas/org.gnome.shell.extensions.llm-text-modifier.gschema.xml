@@ -14,6 +14,12 @@
       <description>The model identifier to be used for the API request.</description>
     </key>
 
+    <key name="api-key" type="s">
+      <default>'random'</default>
+      <summary>API Key</summary>
+      <description>The API key for authentication (default: random).</description>
+    </key>
+
     <key name="hotkey-fix" type="as">
       <default>['&lt;Control&gt;&lt;Super&gt;o']</default>
       <summary>Fix Grammar Hotkey</summary>
