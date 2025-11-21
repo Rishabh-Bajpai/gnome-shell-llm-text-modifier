@@ -8,47 +8,41 @@ import Meta from 'gi://Meta';
 import Shell from 'gi://Shell';
 import Soup from 'gi://Soup';
 
-// We no longer need the hard-coded prompts here
+const PROMPT_FIX_GRAMMAR = "You are a grammar correction tool. Correct the following text. Return *only* the corrected text, with no explanation, preamble, or markdown formatting.";
+const PROMPT_IMPROVE_TEXT = "You are an editing assistant. Improve the following text for clarity, flow, and impact. Return *only* the improved text, with no explanation, preamble, or markdown formatting.";
 
-const LLMTextExtension = class LLMTextExtension extends Extension {
+export default class LLMTextExtension extends Extension {
     constructor(metadata) {
         super(metadata);
-        this._httpSession = null; // Initialize as null
+        this._httpSession = null;
     }
 
     enable() {
-        log(`[${this.uuid}]: Enabling...`);
-        try {
-            this._settings = this.getSettings();
-            this._httpSession = new Soup.Session();
-            
-            this._bindHotkey('hotkey-fix', () => this._processClipboard('fix'));
-            this._bindHotkey('hotkey-improve', () => this._processClipboard('improve'));
-            
-            log(`[${this.uuid}]: Enabled successfully.`);
-        } catch (e) {
-            logError(e, `[${this.uuid}]: FAILED TO ENABLE`);
-        }
+        console.debug(`[${this.uuid}]: Enabling extension...`);
+        
+        this._settings = this.getSettings();
+        this._httpSession = new Soup.Session();
+        
+        this._bindHotkey('hotkey-fix', () => this._processClipboard('fix'));
+        this._bindHotkey('hotkey-improve', () => this._processClipboard('improve'));
     }
 
     disable() {
-        log(`[${this.uuid}]: Disabling...`);
-        try {
-            Main.wm.removeKeybinding('hotkey-fix');
-            Main.wm.removeKeybinding('hotkey-improve');
-        } catch (e) {
-            logError(e, `[${this.uuid}]: FAILED TO REMOVE KEYBINDINGS`);
-        }
+        console.debug(`[${this.uuid}]: Disabling extension...`);
+        
+        Main.wm.removeKeybinding('hotkey-fix');
+        Main.wm.removeKeybinding('hotkey-improve');
 
         this._settings = null;
+
         if (this._httpSession) {
+            // REVIEW FIX 1: Abort pending requests
+            this._httpSession.abort();
             this._httpSession = null;
         }
-        log(`[${this.uuid}]: Disabled.`);
     }
 
     _bindHotkey(name, callback) {
-        log(`[${this.uuid}]: Binding hotkey: ${name}`);
         Main.wm.addKeybinding(
             name,
             this._settings,
@@ -58,7 +52,6 @@ const LLMTextExtension = class LLMTextExtension extends Extension {
         );
     }
 
-    // UPDATED: This function now reads from settings
     _getPrompt(mode, text) {
         let systemPrompt;
         if (mode === 'fix') {
@@ -74,11 +67,11 @@ const LLMTextExtension = class LLMTextExtension extends Extension {
     }
 
     async _processClipboard(mode) {
-        log(`[${this.uuid}]: Hotkey pressed, processing clipboard (${mode})...`);
+        console.debug(`[${this.uuid}]: Processing clipboard for mode: ${mode}`);
         
         if (!this._httpSession) {
-            logError(new Error('_httpSession is null!'), `[${this.uuid}]: LLM Text Modifier Failed`);
-            Main.notifyError("LLM Text Error", "_httpSession is null. Try toggling extension OFF and ON.");
+            console.error(`[${this.uuid}]: _httpSession is null`);
+            Main.notifyError("LLM Text Error", "Session error. Please restart extension.");
             return;
         }
 
@@ -105,8 +98,6 @@ const LLMTextExtension = class LLMTextExtension extends Extension {
             const modelName = this._settings.get_string('model-name');
             const messages = this._getPrompt(mode, clipboardText);
 
-            log(`[${this.uuid}]: Sending to API: ${apiEndpoint} with model: ${modelName}`);
-
             const payload = JSON.stringify({
                 model: modelName,
                 messages: messages,
@@ -128,7 +119,6 @@ const LLMTextExtension = class LLMTextExtension extends Extension {
             if (message.get_status() !== 200) {
                  throw new Error(`API request failed with status ${message.get_status()} ${message.get_reason_phrase()}`);
             }
-            log(`[${this.uuid}]: API request successful.`);
 
             const responseStr = new TextDecoder().decode(bytes.get_data());
             const responseJson = JSON.parse(responseStr);
@@ -141,13 +131,11 @@ const LLMTextExtension = class LLMTextExtension extends Extension {
 
             clipboard.set_text(St.ClipboardType.CLIPBOARD, newText);
             Main.notify("LLM Text", "Text processing complete!");
-            log(`[${this.uuid}]: Text processing complete.`);
 
         } catch (e) {
             Main.notifyError("LLM Text Error", e.message);
-            logError(e, `[${this.uuid}]: LLM Text Modifier Failed`);
+            // REVIEW FIX 3: Use console.error for actual errors
+            console.error(e);
         }
     }
-};
-
-export default LLMTextExtension;
+}

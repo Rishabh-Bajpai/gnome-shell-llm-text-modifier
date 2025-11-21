@@ -1,10 +1,16 @@
 {
   "name": "LLM Text Modifier",
-  "description": "Uses a local LLM to fix or improve text in your clipboard via hotkeys.",
+  "description": "🚀 Supercharge your clipboard with Local AI!\n\nInstantly fix grammar or improve your writing style using your own local LLM server (like LM Studio, Ollama, or LocalAI).\n\n✨ Features:\n• Fix Grammar (Ctrl+Win+O)\n• Improve Text (Ctrl+Win+P)\n• Privacy-first: No data leaves your machine.\n\nFully configurable hotkeys, API endpoints, and system prompts.",
   "uuid": "llm-text-modifier@rishabhbajpai24.com",
-  "version": 1,
-  "shell-version": ["45", "46"],
-  "url": "https://github.com/Rishabh-Bajpai/gnome-shell-llm-text-modifier",
+  "version": 3,
+  "shell-version": [
+    "45",
+    "46"
+  ],
+  "url": "https://github.com/rishabhbajpai24/gnome-shell-llm-text-modifier",
   "settings-schema": "org.gnome.shell.extensions.llm-text-modifier",
-  "gettext-domain": "llm-text-modifier"
+  "gettext-domain": "llm-text-modifier",
+  "donations": {
+    "github": "Rishabh-Bajpai"
+  }
 }
